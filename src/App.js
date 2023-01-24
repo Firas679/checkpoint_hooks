@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MovieList from './Components/MovieList';
+import Filter from './Components/Filter';
 
-function App() {
+
+function App({movieList,setMovieList}) {
+
+const [search, setSearch] = useState('');
+const Title =(search)=>{setSearch(search)}
+const rating = (rate)=>{setRate(rate)}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+      <header>
+        <div className='movieapp'>
+          <Filter Title={Title} rating={rating} />
+          <MovieList movieList={movieList.filter(el=>el.title(search))}/>     
+          </div>
       </header>
-    </div>
-  );
+  )
 }
 
-export default App;
+export default App
