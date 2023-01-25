@@ -8,7 +8,7 @@ const Filter= ({title, rate}) => {
           <Form.Group>
             <Form.Control onChange={(e)=> title(e.target.value)} />  
           </Form.Group>
-          <rate starCount={8} onStarClick={(value)=>rate(value)}/>
+            <Form.Control onClick={(value)=> rate(value)}/>
         </div>
         
     )

@@ -1,21 +1,25 @@
 import React from 'react';
-import {Card, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card} from 'react-bootstrap';
+import { Rating } from '@mui/material';
 
 
-function MovieCard({movieCard}) {    
+function MovieCard({dataMovie}) {    
     return (
 
-    <div> 
-      <Card>
-        <Card.Img src={movieCard.link} alt='movie_card'/>
+    <div style={{display : 'grid', gridTemplateColumns : 'auto auto auto', gap : '50px', margin : '150px', justifyContent : 'center'}}> 
+      {dataMovie.map((movie) => (
+      <div>
+       <Card style={{width : "20rem", height : "400px"}}>
+        <Card.Img style={{width : "16rem"}} src={movie.URL} alt='poster'/>
         <Card.Body>
-           <Card.Title> {movieCard.title} </Card.Title>
-           <Button> Start WAtching!! </Button>
+           <Card.Title> {movie.title} </Card.Title>
+           <Card.Text> {movie.description} </Card.Text>
+           <Rating name="read-only" value={movie.rating} readOnly max={10} />
         </Card.Body>
-      </Card>
+       </Card>
+      </div>
+      ))}
     </div>  
-
     )
 }
 export default MovieCard

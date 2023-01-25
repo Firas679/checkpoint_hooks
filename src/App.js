@@ -1,25 +1,27 @@
 import React, {useState} from 'react';
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import MovieCard from './Components/MovieCard';
 import MovieList from './Components/MovieList';
 import Filter from './Components/Filter';
+import {data} from './Components/data';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Add from './Components/Add';
 
 
-function App({movieList,setMovieList}) {
 
-const [search, setSearch] = useState('');
-const Title =(search)=>{setSearch(search)}
-const rating = (rate)=>{setRate(rate)}
+function App() {
+const [dataMovie,setDataMovie] = useState(data) 
+const AddMovie = (newMovie) => {
+  setDataMovie([...dataMovie,newMovie])
+} 
 
   return (
 
-      <header>
-        <div className='movieapp'>
-          <Filter Title={Title} rating={rating} />
-          <MovieList movieList={movieList.filter(el=>el.title(search))}/>     
-          </div>
-      </header>
-  )
+        <div className='movie_app'>
+          <Add AddMovie={dataMovie}/>
+          <MovieCard dataMovie={dataMovie} />   
+        </div>
+  );
 }
 
 export default App
