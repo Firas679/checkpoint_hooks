@@ -1,30 +1,25 @@
 import React, {useState} from 'react';
 import './App.css'
-import MovieCard from './Components/MovieCard';
-import Filtre from './Components/Filtre';
 import {data} from './Components/data';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Add from './Components/Add';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppChild from './AppChild';
+import MoreInfo from './Pages/MoreInfo';
 
 
 
 function App() {
 const [dataMovie,setDataMovie] = useState(data) 
-const [search,setSearch]=useState('');
-const [rate,setRate]=useState(0);
-const AddMovie = (newMovie) => {
-  setDataMovie([...dataMovie,newMovie])
-} 
 
   return (
 
-        <div className='movie_app'>
-          <div style={{display : 'flex', justifyContent : 'space-around'}}>  
-           <Add AddMovie={AddMovie}/>
-           <Filtre setSearch={setSearch} setRate={setRate} rate={rate} />
-          </div>
-          <MovieCard dataMovie={dataMovie.filter(movie=>movie.title.trim().toLowerCase().includes(search) && movie.rating>=rate)} /> 
-        </div>
+    <Router>
+         <Routes>
+           <Route index element={<AppChild dataMovie={dataMovie} setDataMovie={setDataMovie} />}/>
+           <Route path="/Pages/:movieID" element={<MoreInfo movie={dataMovie} />} />
+         </Routes>
+    </Router>
+
   );
 }
 
