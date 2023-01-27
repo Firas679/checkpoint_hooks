@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import './App.css'
 import MovieCard from './Components/MovieCard';
-import MovieList from './Components/MovieList';
-import Filter from './Components/Filter';
+import Filtre from './Components/Filtre';
 import {data} from './Components/data';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Add from './Components/Add';
@@ -11,6 +10,8 @@ import Add from './Components/Add';
 
 function App() {
 const [dataMovie,setDataMovie] = useState(data) 
+const [search,setSearch]=useState('');
+const [rate,setRate]=useState(0);
 const AddMovie = (newMovie) => {
   setDataMovie([...dataMovie,newMovie])
 } 
@@ -18,8 +19,11 @@ const AddMovie = (newMovie) => {
   return (
 
         <div className='movie_app'>
-          <Add AddMovie={dataMovie}/>
-          <MovieCard dataMovie={dataMovie} />   
+          <div style={{display : 'flex', justifyContent : 'space-around'}}>  
+           <Add AddMovie={AddMovie}/>
+           <Filtre setSearch={setSearch} setRate={setRate} rate={rate} />
+          </div>
+          <MovieCard dataMovie={dataMovie.filter(movie=>movie.title.trim().toLowerCase().includes(search) && movie.rating>=rate)} /> 
         </div>
   );
 }
